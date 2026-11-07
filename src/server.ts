@@ -5,17 +5,18 @@ dotenv.config()//calling the env variable
 
 const app: Express = express()//Creating the express application
 
-app.use(express.json());
+app.use(express.json());//Add JSON middleware
 
-const port: number = Number(process.env.PORT) || 3000;
+const port: number = Number(process.env.PORT) || 3000;//Create application and call port from .env
 
-
+//define the interface for a fake DB
 interface Tasks {
     "id":number;
    "title":string;
     "completed":boolean;
 }
 
+//Define the fake DB documents
 const tasks : Tasks[] = [
     {
         "id":1,
@@ -28,15 +29,16 @@ const tasks : Tasks[] = [
         "completed": false,
 },
 ]
-let nextId = 3
+let nextId = 3//This mean that there are 2 id existing so nextId starts from 3
 
 
+//define route to fetch tasks from DB
 app.get('/tasks', (req:Request, res:Response) => {
        res.json(tasks)
 })
 
 
-//introducing route parameters
+//introducing route parameters, get tasks by Id
 app.get('/tasks/:id', (req:Request, res:Response) => {
     const id = Number(req.params.id);
 
@@ -53,6 +55,7 @@ app.get('/tasks/:id', (req:Request, res:Response) => {
 });
 
 
+//New POST route to create new tasks
 app.post('/tasks', (req:Request, res:Response) => {
     const { title } = req.body;
 
