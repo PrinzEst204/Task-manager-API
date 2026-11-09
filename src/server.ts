@@ -1,7 +1,8 @@
 import express, { type Express, type Request, type Response } from 'express'
 import dotenv from 'dotenv'
-
 dotenv.config()//calling the env variable
+
+import connectDB from './config/db'
 
 const app: Express = express()//Creating the express application
 
@@ -130,7 +131,9 @@ app.delete('/tasks/:id', (req: Request, res:Response) => {
     res.json(deletedTask)
 });
 
-
+connectDB().then( () => {
  app.listen(port, () => {
         console.log(`Server is running on http://localhost:${port}`);
     });
+});
+

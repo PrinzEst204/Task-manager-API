@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import dotenv from 'dotenv'
 
 const MONGO_URI: string = process.env.MONGO_URI || '';
 // Connect to MongoDB
@@ -12,3 +11,5 @@ const connectDB = async () => {
         process.exit(1); // Kill the server — no point running without a database
     }
 };
+
+export default connectDB
